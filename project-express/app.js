@@ -54,6 +54,8 @@ app.use(passport.session());*/
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./api/user.js'));
 
+app.use('/dogs', require('./api/dog.js'));
+
 const PORT = 8086;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
