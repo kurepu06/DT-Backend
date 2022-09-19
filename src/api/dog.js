@@ -9,6 +9,7 @@ router.get("/owner/:id", dogs.getDogByOwnerId);
 
 router.post("/", dogs.addDog);
 router.put("/", dogs.updateDogInfo);
+router.delete("/", dogs.deleteDog)
 
 
 
