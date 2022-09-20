@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest --no-cache"
-
+    "test": "jest --testEnvironment=node --runInBand ./tests"
   },
   "author": "",
   "license": "ISC",
@@ -14,8 +13,13 @@
     "nodemon": "^2.0.19"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.0",
     "dotenv": "^16.0.2",
     "jest": "^29.0.3",
+    "mongodb-memory-server": "^8.9.2",
     "mongoose": "^6.6.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

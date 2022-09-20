@@ -22,7 +22,7 @@ const DogSchema = new mongoose.Schema({
     required: true
   },
   birthday: {
-    type: Date,
+    type: String, //date 
     required: true
   }
 });
@@ -31,3 +31,4 @@ const DogSchema = new mongoose.Schema({
 const Dog = mongoose.model('Dog', DogSchema);
 
 module.exports = Dog;
+
