@@ -1,24 +1,31 @@
+'use strict';
 
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
-//const mongod = new MongoMemoryServer();
-const mongod = await MongoMemoryServer.create();
+let mongod = undefined;
 
-const uri = mongo.getUri();
 
-//connect to db
+/**
+ * Connect to the in-memory database.
+ */
 module.exports.connect = async () => {
+    mongod = await MongoMemoryServer.create();
+    const uri = mongod.getUri();
 
     const mongooseOpts = {
         useNewUrlParser: true,
-        useUnifiedTopololy: true,
-        poolSize: 10
+        autoReconnect: true,
+        reconnectTries: Number.MAX_VALUE,
+        reconnectInterval: 1000
     };
+
     await mongoose.connect(uri, mongooseOpts);
 };
 
-//disconnect and close connection
+/**
+ * Drop database, close the connection and stop mongod.
+ */
 module.exports.closeDatabase = async () => {
     if (mongod) {
         await mongoose.connection.dropDatabase();
@@ -27,10 +34,13 @@ module.exports.closeDatabase = async () => {
     }
 };
 
-//clear and remove data
+/**
+ * Remove all the data for all db collections.
+ */
 module.exports.clearDatabase = async () => {
     if (mongod) {
         const collections = mongoose.connection.collections;
+
         for (const key in collections) {
             const collection = collections[key];
             await collection.deleteMany();
