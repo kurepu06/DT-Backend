@@ -52,9 +52,9 @@ app.use(passport.session());*/
 
 // Routes
 app.use('/', require('./routes/index.js'));
-app.use('/users', require('./api/user.js'));
+app.use('/users', require('./routes/user.js'));
 
-app.use('/dogs', require('./api/dog.js'));
+app.use('/dogs', require('./routes/dog.js'));
 
 const PORT = 8086;
 
